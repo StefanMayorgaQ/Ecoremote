@@ -8,7 +8,8 @@
  *
  * @author suneater
  */
-import java.net.*;
+import java.net.*;//realizar coneccion a traves de la red
+import javax.swing.JOptionPane;//ventanas de dialogo
 public class ServerUDP {
 
     /**
@@ -19,8 +20,10 @@ public class ServerUDP {
         try
         {
             System.out.println("\n*****Arrancando el servidor*****\n");
-            DatagramSocket Coneccion = new DatagramSocket(5000);
-            String Cerrar = new String("cierre");
+            int Puerto = 5001;
+            DatagramSocket Coneccion = new DatagramSocket(Puerto);//permite instancias de datagramas recibidos
+            //especificando la cadena de byte y la longuitud del sms
+            String Cerrar = "cierre";
             
             while(true)
             {
@@ -45,26 +48,28 @@ public class ServerUDP {
               
                if(CadenaServer.indexOf("cierre") <0 )
                {
-                   System.out.println("Enviando... "+Senviada);
+                   System.out.println("Enviando ... "+Senviada.toString());
                    
                 }
                else
                {
                    
-                   System.out.println("Se detecto cadena vacia para cerrar la conection");
+                   
+                   
+                    System.out.println("Se detecto cadena vacia, bye");
                     Coneccion.close();
-                    System.out.println("El servidor a cerrado secion\n");
+                    System.out.println("El servidor a cerrado sesion\n");
                     break;
                }
                
-               System.out.println("Hola server Abajo");
+
             }
         }
         catch(Exception e)
         {
             System.out.println("Ocurrio un error: "+e.getMessage());
         }
-        System.out.println("Adios clientete");
+        System.out.println("Adios cliente");
     }
     
 }
